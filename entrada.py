@@ -3,7 +3,7 @@ import csv
 import streamlit as st
 from datetime import date
 
-st.title("Incluir Entrada")
+st.title("Inclusão de Operador")
 
 # Data de entrada não pode ser alterada!
 data = st.date_input("Data Entrada", value=date.today(), key="data")
@@ -35,12 +35,12 @@ with open(arquivo_csv, 'r', newline='', encoding='utf-8') as file:
             if estado not in estados:
                 estados.append(estado)
 
-local_entrada = st.selectbox('Local de entrada', ['Clean Plastic', 'Clean Poa', 'Clean Jundiai', 'Clean Bottle', 'Clean Fortal', 'Raposo Plasticos', 'Raposo Minas', 'Fornecedor PF', 'Outro'])
+empresa = st.selectbox('Empresa', ['Clean Plastic', 'Clean Poa', 'Clean Jundiai', 'Clean Bottle', 'Clean Fortal', 'Raposo Plasticos', 'Raposo Minas'])
 
 col1, col2 = st.columns(2)
 with col1:
-    motivo = st.selectbox('Motivo:', ['Carregar', 'Descarregar', 'Entrega', 'Retirada'])
     nome_completo = st.text_input("Nome Completo:").upper()
+    usuario = st.text_input("Usuário").upper()
     tipo_veiculo = st.selectbox('Tipo de Veiculo:', ["Truck-Side", "Carreta-Side", "Truck-Grade Baixa", "Carreta-Grade Baixa", "Carreta Graneleira", "Container","Bitrem","Bitruck"])
     placa = st.text_input('Placa do Veiculo:').upper()
     status_veiculo = st.selectbox('Status Veiculo', ['Proprio', 'Terceiro', 'Transportadora'])
@@ -49,13 +49,7 @@ with col1:
     status = "Aguardando Entrada"  # Valor fixo para "Aguardando Entrada"
 
 with col2:
-    razao_social = st.text_input('Razão Social').upper()
-    estado = st.selectbox('Selecione o estado', estados)
-    municipios = obter_municipios(estado)
-    cidade = st.selectbox('Selecione a cidade', municipios)
-    telefone = st.text_input('Telefone').upper()
-    frete_retorno = st.selectbox('Possuem Frete Retorno?', ['Sim', 'Nao'])
-    numero_page = st.number_input('Número do Page', min_value=1, max_value=16, step=1)
+    usuario = st.text_input("Usuário").upper()
 
 info_complementar = st.text_area('Info. Complementar')
 
