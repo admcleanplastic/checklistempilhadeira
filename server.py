@@ -6,7 +6,7 @@ def create_user_table():
     conn = sqlite3.connect('novo.db')
     cursor = conn.cursor()
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS usuarios (
+        CREATE TABLE IF NOT EXISTS operador (
             ID INTEGER PRIMARY KEY AUTOINCREMENT,
             user TEXT NOT NULL,
             senha TEXT NOT NULL
@@ -19,7 +19,7 @@ def create_user_table():
 def add_user(user, senha):
     conn = sqlite3.connect('novo.db')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO usuarios (user, senha) VALUES (?, ?)', (user, senha))
+    cursor.execute('INSERT INTO operador (user, senha) VALUES (?, ?)', (user, senha))
     conn.commit()
     conn.close()
 
@@ -27,7 +27,7 @@ def add_user(user, senha):
 def remove_user(user_id):
     conn = sqlite3.connect('novo.db')
     cursor = conn.cursor()
-    cursor.execute('DELETE FROM usuarios WHERE ID = ?', (user_id,))
+    cursor.execute('DELETE FROM operador WHERE ID = ?', (user_id,))
     conn.commit()
     conn.close()
 
@@ -35,7 +35,7 @@ def remove_user(user_id):
 def list_users():
     conn = sqlite3.connect('novo.db')
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM usuarios')
+    cursor.execute('SELECT * FROM operador')
     users = cursor.fetchall()
     conn.close()
     return users
@@ -44,7 +44,7 @@ def list_users():
 def edit_user(user_id, new_user, new_password):
     conn = sqlite3.connect('novo.db')
     cursor = conn.cursor()
-    cursor.execute('UPDATE usuarios SET user = ?, senha = ? WHERE ID = ?', (new_user, new_password, user_id))
+    cursor.execute('UPDATE operador SET user = ?, senha = ? WHERE ID = ?', (new_user, new_password, user_id))
     conn.commit()
     conn.close()
 
