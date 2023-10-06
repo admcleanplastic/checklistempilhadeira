@@ -73,7 +73,7 @@ def show_menu():
     # Se o usuário for um administrador, define o menu com opções adicionais
     if st.session_state.selected_table == "USER_ADMIN":
         st.sidebar.markdown('## Menu Administrador')
-        menu_option = st.sidebar.radio("Menu", ["Entrada", "Gestão de Entrada", "Inativar Entrada", "Extrair Relatório", "Usuários", "Banco de Dados", "Usuario Administrador", "Logout"])
+        menu_option = st.sidebar.radio("Menu", ["Entrada", "Gestão de Entrada", "Inativar Entrada", "Extrair Relatório", "Incluir Operador", "Banco de Dados", "Usuarios Administrador", "Logout"])
     else:
         # Se não for um administrador, define o menu padrão
         st.sidebar.markdown('## Menu')
@@ -87,8 +87,8 @@ def show_menu():
         exec(open("gestao_entrada.py").read())    
     elif menu_option == "Extrair Relatório":
         exec(open("relatorio.py").read())
-    elif menu_option == "Usuários":
-        exec(open("server.py").read())
+    elif menu_option == "Incluir Operador":
+        exec(open("entrada.py").read())
     elif menu_option == "Banco de Dados":
         exec(open("editar_excluir.py").read())
     elif menu_option == "Usuario Administrador":
