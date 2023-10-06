@@ -20,14 +20,14 @@ with col2:
     senha = st.text_input('Senha', type='password')
     Equipamento = st.selectbox('Equipamento:', ['Empilhadeira Recevimento 01'])
 
-def is_form_valid(data, Nome_completo, user, Turno, Setor, password, Equipamento):
+def is_form_valid(data, Nome_completo, user, Turno, Setor, senha, Equipamento):
     required_fields = [
         data,
         Nome_completo,
         user,
         Turno,
         Setor,
-        password,
+        senha,
         Equipamento,
     ]
 
@@ -38,7 +38,7 @@ def is_form_valid(data, Nome_completo, user, Turno, Setor, password, Equipamento
     return True
 
 if st.button("Salvar"):
-    if is_form_valid(data, Nome_completo, user, Turno, Setor, password, Equipamento):
+    if is_form_valid(data, Nome_completo, user, Turno, Setor, senha, Equipamento):
         # Conectar ao banco de dados ou criar um novo se ele não existir
         conn = sqlite3.connect('novo.db')
 
@@ -53,7 +53,7 @@ if st.button("Salvar"):
                         user TEXT,
                         Turno TEXT,
                         Setor TEXT,
-                        password TEXT,
+                        senha TEXT,
                         Equipamento TEXT
                     )''')
 
@@ -63,7 +63,7 @@ if st.button("Salvar"):
         user_value = user
         Turno_value = Turno
         Setor_value = Setor
-        password_value = password
+        senha_value = senha
         Equipamento_value = Equipamento
 
         # Inserir os valores na tabela 'operador'
@@ -73,7 +73,7 @@ if st.button("Salvar"):
                         user,
                         Turno,
                         Setor,
-                        password,
+                        senha,
                         Equipamento
                     )
                     VALUES (?, ?, ?, ?, ?, ?, ?)''',
@@ -83,7 +83,7 @@ if st.button("Salvar"):
                        user_value,
                        Turno_value,
                        Setor_value,
-                       password_value,
+                       senha_value,
                        Equipamento_value
                    ))
 
