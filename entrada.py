@@ -17,7 +17,7 @@ with col1:
 
 with col2:
     Setor = st.selectbox('Setor:', ['Blenda', 'Recebimento', 'Logística'])
-    password = st.text_input('Senha', type='password')
+    senha = st.text_input('Senha', type='password')
     Equipamento = st.selectbox('Equipamento:', ['Empilhadeira Recevimento 01'])
 
 def is_form_valid(data, Nome_completo, user, Turno, Setor, password, Equipamento):
