@@ -45,14 +45,14 @@ st.write('Editar Usuário')
 users = list_users()
 selected_user = st.selectbox('Selecione um usuário para editar:', users)
 if selected_user:
-    user_id, data, empresa, nome_completo, usuario, turno, setor, _, _ = selected_user
-    new_data = st.date_input("Data", value=data, key="data")
+    user_id, data, empresa, nome_completo, usuario, turno, setor, senha, equipamento = selected_user
+    new_data = st.date_input("Data", value=date.today(), key="data")
     new_empresa = st.selectbox('Empresa', ['Clean Plastic'], index=0 if empresa == 'Clean Plastic' else 1)
     new_nome_completo = st.text_input("Nome Completo:", value=nome_completo).upper()
     new_usuario = st.text_input("Usuário", value=usuario).upper()
     new_turno = st.selectbox('Turno:', ['1º Turno', '2º Turno', '3º Turno', 'ADM'], index=['1º Turno', '2º Turno', '3º Turno', 'ADM'].index(turno))
     new_setor = st.selectbox('Setor:', ['Blenda', 'Recebimento', 'Logística'], index=['Blenda', 'Recebimento', 'Logística'].index(setor))
-    new_senha = st.text_input('Senha', value="", type='password')
+    new_senha = st.text_input('Senha', value=senha, type='password')
     new_equipamento = st.selectbox('Equipamento:', ['Empilhadeira Recebimento 01'], index=0)
 
     if st.button('Editar'):
@@ -61,12 +61,13 @@ if selected_user:
 
 # Formulário para remover um usuário
 st.write('Remover Usuário')
-selected_user = st.selectbox('Selecione um usuário para remover:', users)
-if selected_user:
-    user_id = selected_user[0]
-    if st.button('Remover'):
-        remove_user(user_id)
-        st.success(f'Usuário "{selected_user[3]}" removido com sucesso!')
+if users:
+    selected_user = st.selectbox('Selecione um usuário para remover:', users)
+    if selected_user:
+        user_id = selected_user[0]
+        if st.button('Remover'):
+            remove_user(user_id)
+            st.success(f'Usuário "{selected_user[3]}" removido com sucesso!')
 
 # Lista de usuários existentes
 st.write('Usuários Existentes')
