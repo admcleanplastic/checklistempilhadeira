@@ -6,52 +6,28 @@ from datetime import date
 st.title("Inclusão de Operador")
 
 # Data de entrada não pode ser alterada!
-data = st.date_input("Data Entrada", value=date.today(), key="data")
+data = st.date_input("Data", value=date.today(), key="data")
 
-# Função para obter os municípios de um estado específico
-def obter_municipios(estado):
-    municipios = []
 
-    # Caminho para o arquivo CSV local
-    arquivo_csv = 'dados.csv'
-
-    with open(arquivo_csv, 'r', newline='', encoding='utf-8') as file:
-        reader = csv.DictReader(file, delimiter=';')
-        for row in reader:
-            if 'UF' in row and row['UF'] == estado:
-                municipios.append(row['Município'])
-
-    return municipios
-
-# Obtém a lista de estados
-estados = []
-arquivo_csv = 'dados.csv'
-
-with open(arquivo_csv, 'r', newline='', encoding='utf-8') as file:
-    reader = csv.DictReader(file, delimiter=';')
-    for row in reader:
-        if 'UF' in row:
-            estado = row['UF']
-            if estado not in estados:
-                estados.append(estado)
-
-empresa = st.selectbox('Empresa', ['Clean Plastic', 'Clean Poa', 'Clean Jundiai', 'Clean Bottle', 'Clean Fortal', 'Raposo Plasticos', 'Raposo Minas'])
+Empresa = st.selectbox('Empresa', ['Clean Plastic'])
 
 col1, col2 = st.columns(2)
 with col1:
-    nome_completo = st.text_input("Nome Completo:").upper()
-    usuario = st.text_input("Usuário").upper()
-    tipo_veiculo = st.selectbox('Tipo de Veiculo:', ["Truck-Side", "Carreta-Side", "Truck-Grade Baixa", "Carreta-Grade Baixa", "Carreta Graneleira", "Container","Bitrem","Bitruck"])
-    placa = st.text_input('Placa do Veiculo:').upper()
-    status_veiculo = st.selectbox('Status Veiculo', ['Proprio', 'Terceiro', 'Transportadora'])
-
-    # Adicione o campo "Local de Entrada" aqui
-    status = "Aguardando Entrada"  # Valor fixo para "Aguardando Entrada"
+    Nome_completo = st.text_input("Nome Completo:").upper()
+    user = st.text_input("Usuário").upper()
+    Turno = st.selectbox('Turno:', ['1º Turno','2º Turno,'3º Turno','ADM'])
+    
+    
+    
+    
 
 with col2:
-    usuario = st.text_input("Usuário").upper()
+      Setor = st.selectbox('Setor:', ['Blenda','Recebimento','Logística'])
+      password = st.text_input('Senha', type='password')
+      Equipamento = st.selectbox('Equipamento:', ['Empilhadeira Recevimento 01'])
+    
 
-info_complementar = st.text_area('Info. Complementar')
+
 
 def is_form_valid(data, nome_completo, tipo_veiculo, motivo, placa, razao_social, estado, cidade, telefone, frete_retorno, local_entrada, status_veiculo, numero_page):
     required_fields = [
