@@ -2,7 +2,7 @@ import sqlite3
 import streamlit as st
 from datetime import date
 
-st.title("Inclusão de Operador")
+st.title("Incluir operador")
 
 # Data de entrada não pode ser alterada!
 data = st.date_input("Data", value=date.today(), key="data")
