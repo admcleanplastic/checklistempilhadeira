@@ -1,0 +1,24 @@
+table{
+    font-size: 10px;
+    text-align: center;
+    border-top: 10px;
+
+}
+
+}
+.stButton > button{
+    color: #F9F9F9 ;
+    background-color:#1C3BA6 ;
+    
+    border-color: none;
+    font-size: 25px;
+    width: 100%;
+    height: 60%;
+    font-size: 30px;
+    
+}
+.stButton > button:hover{
+    background-color:#1E8449 ;
+    color: #F9F9F9;
+    border-color: #F9F9F9;
+}

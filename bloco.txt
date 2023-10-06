@@ -1,0 +1,43 @@
+import streamlit as st
+import sqlite3
+from datetime import date
+
+st.title('Entrada/Saida')
+col1, col2 = st.columns(2)
+today = date.today()
+
+with col1:
+    nome_completo = st.text_input("Nome Completo:")
+    tipo_veiculo = st.selectbox('Tipo de Veiculo:', ['Truck', 'Carreta'])
+    motivo = st.selectbox('Motivo:', ['Carregar', 'Descarregar'])
+    entrada_saida = st.selectbox('Status:', ['Chega na empresa', 'Carregando','Descarregando','Saida da empresa'])
+
+with col2:
+    empresa = st.text_input("Empresa:")
+    nota_fiscal = st.text_input('Nota Fiscal')
+    placa = st.text_input('Placa do Veiculo:')
+    data = st.date_input("Data Entrada", value=today, key="data_input")
+
+enviar = st.button('Enviar')
+
+# Se o botão "Enviar" for clicado
+if enviar:
+    # Criando uma conexão com o banco de dados
+    conn = sqlite3.connect('novo.db')
+    c = conn.cursor()
+
+    # Criando a tabela, se ela não existir
+    c.execute('''CREATE TABLE IF NOT EXISTS entrada_saida
+                 (nome_completo TEXT, tipo_veiculo TEXT, motivo TEXT, entrada_saida TEXT,
+                 empresa TEXT, nota_fiscal TEXT, placa TEXT, data DATE)''')
+
+    # Inserindo os valores dos campos na tabela
+    c.execute("INSERT INTO entrada_saida (nome_completo, tipo_veiculo, motivo, entrada_saida, empresa, nota_fiscal, placa, data) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+              (nome_completo, tipo_veiculo, motivo, entrada_saida, empresa, nota_fiscal, placa, data))
+
+    # Salvando as alterações no banco de dados
+    conn.commit()
+    st.write('Registro Salvo com Sucesso!')
+
+    # Fechando a conexão com o banco de dados
+    conn.close()
